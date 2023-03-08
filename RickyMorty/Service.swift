@@ -1,6 +1,6 @@
 //
 //  Service.swift
-//  RickyMortyWithAlbooren
+//  RickyMorty
 //
 //  Created by Alihan Özaltın on 7.03.2023.
 //

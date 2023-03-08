@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  RickyMortyWithAlbooren
+//  RickyMorty
 //
 //  Created by Alihan Özaltın on 6.03.2023.
 //
