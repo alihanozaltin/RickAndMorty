@@ -8,11 +8,17 @@
 import UIKit
 import SnapKit
 
+protocol RickyMortyOutPut {
+    func changeLoading(isLoad: Bool)
+    func saveDatas(values: [Result])
+    
+}
 
-class RickyMortyViewController: UIViewController {
-    let labelTitle : UILabel = UILabel()
-    let indicator : UIActivityIndicatorView = UIActivityIndicatorView()
-    let box : UIView = UIView()
+
+ class RickyMortyViewController: UIViewController {
+     let labelTitle : UILabel = UILabel()
+     let indicator : UIActivityIndicatorView = UIActivityIndicatorView()
+     let box : UIView = UIView()
     
     
 
