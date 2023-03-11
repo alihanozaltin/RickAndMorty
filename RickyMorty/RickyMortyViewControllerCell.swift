@@ -6,11 +6,53 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class RickyMortyTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    let customImage: UIImageView = UIImageView()
+    let title: UILabel = UILabel()
+    let descriction: UILabel = UILabel()
+    
+    let randomImage: String = "https://picsum.photos/200/300"
+    
+    enum identifier: String {
+        case custom = "xxx"
+    }
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        configure()
+    }
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implement")
+    }
+    private func configure(){
+        addSubview(customImage)
+        addSubview(title)
+        addSubview(descriction)
+        title.font = .boldSystemFont(ofSize: 18)
+        descriction.font = .italicSystemFont(ofSize: 10)
+        
+        customImage.snp.makeConstraints { make in
+            make.height.equalTo(100)
+            make.top.equalTo(contentView)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        title.snp.makeConstraints { make in
+            make.top.equalTo(customImage.snp.bottom).offset(10)
+            make.right.left.equalTo(contentView)
+           
+        }
+        descriction.snp.makeConstraints { make in
+            make.top.equalTo(title).offset(5)
+            make.right.left.equalTo(title)
+            make.bottom.equalToSuperview()
+        }
+    }
+    func saveModel(model:Result) {
+        title.text = model.name
+        descriction.text = model.status
+        customImage.af.setImage(withURL: (URL(string: model.image ?? randomImage) ?? URL(string: "randomImage")) ?? URL(string: randomImage)!)
     }
 }

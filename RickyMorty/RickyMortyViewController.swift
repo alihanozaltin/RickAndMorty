@@ -50,10 +50,14 @@ class RickyMortyViewController: UIViewController, RickyMortyOutPut {
         tableView.backgroundColor = .clear
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(RickyMortyTableViewCell.self, forCellReuseIdentifier: RickyMortyTableViewCell.identifier.custom.rawValue)
         view.backgroundColor = .white
         labelTitle.text = "Ricky Morty"
+        labelTitle.font = .boldSystemFont(ofSize: 25)
         indicator.color = .red
         indicator.startAnimating()
+        
+        tableView.rowHeight = 150
         
         labelTitle.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
@@ -77,8 +81,10 @@ class RickyMortyViewController: UIViewController, RickyMortyOutPut {
 
 extension RickyMortyViewController: UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = results[indexPath.row].name ?? ""
+        guard let cell : RickyMortyTableViewCell = tableView.dequeueReusableCell(withIdentifier: RickyMortyTableViewCell.identifier.custom.rawValue) as? RickyMortyTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.saveModel(model: results[indexPath.row])
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
